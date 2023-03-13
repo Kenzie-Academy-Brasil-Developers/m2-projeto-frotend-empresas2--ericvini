@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <script src="https://kit.fontawesome.com/132f404249.js" crossorigin="anonymous"></script>
+    <title>Página de Usúario</title>
+</head>
+<body>
+    <div class="modal__wrapper display__none">
+        <div class="modal__container">
+            <h2>Editar Perfil</h2>
+            <button class="modal__button--X" data-modal="close">
+                <i class="fa-sharp fa-solid fa-x"></i>
+            </button>
+            <form class="modal__form">
+                <input class="modal__input--profile" name="username" type="text" placeholder="Seu Nome">
+                <input class="modal__input--profile" name="email" type="email" placeholder="Seu Email">
+                <input class="modal__input--profile" name="password" type="password" placeholder="Seu password">
+                <button type="submit" class="modal__button--profile">Editar perfil</button>
+            </form>
+        </div>
+    </div>
+    <header>
+        <div class="container header__container">
+            <div class="img__logo">
+                <div id="ball"></div>
+                <img src="../assets/img/Logo.png" alt="Imagem da logo">
+            </div>
+            <nav class="header__container--buttons display__none">
+                <button class="a__button brand-color brand-border a__button--logout">Logout</button>
+            </nav>
+            <button id="bars">
+                <i class="fa-sharp fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <main>
+        <div class="user__info">
+        </div>
+
+        <div class="user__job">
+        </div>
+    </main>
+    <script type="module" src="../scripts/dashboard.js"></script>
+</body>
+</html>

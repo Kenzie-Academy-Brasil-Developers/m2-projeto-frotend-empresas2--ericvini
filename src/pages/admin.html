@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/globalStyles.css">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <script src="https://kit.fontawesome.com/132f404249.js" crossorigin="anonymous"></script>
+    <title>Página de Administrador</title>
+</head>
+<body>
+    <div class="modal__wrapper display__none">
+        <div class="modal__container">
+        </div>
+    </div>
+    <header>
+        <div class="container header__container">
+            <div class="img__logo">
+                <div id="ball"></div>
+                <img src="../assets/img/Logo.png" alt="Imagem da logo">
+            </div>
+            <nav class="header__container--buttons display__none">
+                <button class="a__button brand-color brand-border a__button--logout">Logout</button>
+            </nav>
+            <button id="bars">
+                <i class="fa-sharp fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="section__container section__container--enterprises">
+            <div class="section__container--title">
+                <h2>Departamentos</h2>
+                <select name="select-enterprise" id="enterprises">
+                    <option value="">Selecionar Empresas</option>
+                </select>
+                <button class="section__button--create" data-modal="open">
+                    <i class="fa-thin fa-plus"></i>
+                    <span>Criar</span>
+                </button>
+            </div>
+            <ul class="section__container--list section__list--department">
+            </ul>
+        </section>
+        <section class="section__container section__container--users">
+            <div class="section__container--title">
+                <h2>Usuários Cadastrados</h2>
+            </div>
+            <ul class="section__container--list section__list--users">
+            </ul>
+        </section>
+    </main>
+
+    <script type="module" src="../scripts/dashboard.js"></script>
+</body>
+</html>

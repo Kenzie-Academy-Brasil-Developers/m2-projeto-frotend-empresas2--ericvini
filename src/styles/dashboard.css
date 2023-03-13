@@ -1,0 +1,202 @@
+@media (min-width: 320px) {
+    /* USER DASHBOARD CSS */
+    .user__info {
+        position: relative;
+        color:var(--color-gray2);
+        width: 80%;
+        height: 8.5625rem;
+        padding: 1rem 1.5rem;
+        margin: 2rem auto;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .user__info>h2 {
+        font-weight: 700;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+    .user__info--infos {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.375rem;
+        font-weight: 400;
+        line-height: 1.625rem;
+    }
+    .user__job {
+        position: relative;
+        margin: 2.5rem auto;
+        width: 80%;
+        height: 29.1875rem;
+        background: #F8F8F8;
+        border: 1px solid #A8A8A8;
+    }
+    .user__job--unemployed {
+        position: absolute;
+        top: 45%;
+        right: 15.625rem;
+        color: var(--color-gray2);
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+    .user__job--title{
+        width: 100%;
+        height: 4.875rem;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 2.4375rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-justify: center;
+        background-color: var(--color-brand);
+        color: #fff;
+    }
+    .user__job--list {
+        margin: 4rem;
+        width: 90%;
+        height: 15.875rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1.5rem 2.5rem;
+        justify-content: flex-start;
+        align-content: flex-start;
+    }
+    .job__list--item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 32%;
+        height: 4.75rem;
+        padding: 1rem;
+        background: #FFFFFF;
+        border: 1px solid #4200FF;
+        font-weight: 400;
+        font-size: .9375rem;
+        line-height: 1.1344rem;
+        color: var(--color-gray2);
+    }
+    .job__list--item>h3 {
+        font-weight: 700;
+    }
+    #pencil {
+        top: 10px;
+        right: 10px;
+        position: absolute;
+    }
+
+    /* ADMIN DASHBOARD CSS */
+    .section__container {
+        width: 79%;
+        height: 24.0625rem;
+        margin: 5rem auto;
+    }
+    .section__container--title {
+        display: flex;
+        justify-content: space-between;
+        color: var(--color-gray2);
+    }
+    .section__button--create {
+        width: 9.375rem;
+        height: 3rem;
+        color: var(--color-gray1);
+        background-color: var(--color-brand);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .section__button--create>span {
+        width: 5.4375rem;
+        font-weight: 700;
+        font-size: 1.125rem;
+        line-height: 1.375rem;     
+    }
+    .section__button--create i {
+        font-size: 2rem;
+    }
+    .section__container--title>h2{
+        font-weight: 700;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+    #enterprises{
+        width: 17.625rem;
+        height: 2rem;
+        border: 1px solid #000000;
+        padding: 0 1.5rem;
+        border-radius: 15px;
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    }
+    .section__container--list {
+        width: 71.75rem;
+        height: 92%;
+        background-color: #F8F8F8;
+        margin: 1.5rem auto;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem 6.5rem;
+        flex-wrap: wrap;
+        overflow-y: auto;
+    }
+    .section__list--item {
+        padding: 1rem 1.5rem;
+        width: 30.5625rem;
+        height: 12.25rem;
+        background: #FFFFFF;
+        border-bottom: 1px solid #4200FF;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .section__list--item>h3{
+        font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    }
+    .section__list--item p {
+        font-weight: 400;
+        font-size: 1.125rem;
+        line-height: 1.3125rem;
+    }
+    .section__container--users {
+        margin-top: 5.25rem;
+    }
+    .section__container--users .section__container--title {
+        display: flex;
+        justify-content: center;
+    }
+    .list__buttons {
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+    .list__buttons button img {
+        width: 100%;
+        height: 100%;
+        font-size: 2rem;
+    }
+}
+@media (min-width: 768px) {
+    #pencil {
+        top: 35%;
+        right:32px;
+    }
+}
+@media (min-width: 1024px) {
+    .user__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .user__info--infos {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 5rem;
+    }
+}

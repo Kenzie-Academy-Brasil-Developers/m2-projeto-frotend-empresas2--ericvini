@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/styles/reset.css" />
+    <link rel="stylesheet" href="./src/styles/globalStyles.css" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <script
+      src="https://kit.fontawesome.com/132f404249.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Página Principal</title>
+  </head>
+  <body>
+    <header>
+      <div class="container header__container">
+        <div class="img__logo">
+          <div id="ball"></div>
+          <img src="./src/assets/img/Logo.png" alt="Imagem da logo" />
+        </div>
+        <nav class="header__container--buttons display__none">
+          <a
+            class="a__button a__button--login brand-border brand-color"
+            href="./src/pages/login.html"
+            >Login</a
+          >
+          <a
+            class="a__button a__button--register brand-bgc"
+            href="./src/pages/register.html"
+            >Cadastrar</a
+          >
+        </nav>
+        <button id="bars">
+          <i class="fa-sharp fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+    <main>
+      <div class="container main__container">
+        <img
+          src="./src/assets/img/backgroundImg.png"
+          alt="side Image"
+          class="bgc-img"
+        />
+        <div class="sectors__container">
+          <select name="sectors" id="select">
+            <option value="">Selecione um Setor</option>
+          </select>
+          <ul class="sectors__container--list"></ul>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./src/scripts/render.js"></script>
+  </body>
+</html>
