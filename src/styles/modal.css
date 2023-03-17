@@ -17,6 +17,7 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 2rem 2.5rem;
+    animation: modal-In 1s
 }
 
 .modal__button--X {
@@ -252,4 +253,70 @@
     font-size: 1.125rem;
     line-height: 1.375rem;
     color: var(--color-gray1);
+}
+
+.toast__container {
+    width: 12.9375rem;
+    height: 4.25rem;
+    position: fixed;
+    top: 30px;
+    right: 40%;
+    z-index: 15;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: toast-In 1s;
+}
+
+.toast__remove {
+    animation: toast-Out 1s;
+}
+
+.toast__container p {
+    width: 80%;
+    color: #fff;
+    font-size: .875rem;
+    font-weight: 700;
+    line-height: 1.0625rem;
+    text-align: center;
+}
+
+.display__none { 
+    display: none;
+}
+
+@keyframes modal-In {
+    0% {
+        opacity: 0;
+        transform: translateY(-30%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes toast-In {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes toast-Out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50%);
+        display: none;
+    }
 }

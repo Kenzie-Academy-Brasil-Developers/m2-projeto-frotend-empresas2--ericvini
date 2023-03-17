@@ -1,4 +1,4 @@
-import {getToken, register, authenticateUser} from './requests.js';
+import {getToken, register, authenticateUser, toastfy} from './requests.js';
 
 
 function loginUser() {
@@ -16,22 +16,23 @@ function loginUser() {
             loginBody[name] = value;
         })
         if(count !== 0) {
-            alert("Por favor preencha os campos corretamente")
+            toastfy("Por favor preencha os campos corretamente")
         } else {
             const user = await getToken(loginBody);
             if(!user.error) {
+                toastfy("Login realizado com sucesso", true)
                 if(await authenticateUser(user)) {
                     setTimeout(() => {
                         window.location.replace("./admin.html");
-                    }, 2000)
+                    }, 3000)
                 }else {
                     setTimeout(() => {
                         window.location.replace("./user.html")
-                    },2000)
+                    },3000)
                 }
 
             }else {
-                alert(user.error)
+                toastfy(user.error)
             }
         }
     })
@@ -51,13 +52,13 @@ function registerUser () {
             registerBody[name] = value;
         })
         if(count !== 0) {
-            alert("Preencha os campos corretamente")
+            toastfy("Preencha os campos corretamente")
         }else {
-            alert("Usuário criado com sucesso")
+            toastfy("Usuário criado com sucesso", true)
             await register(registerBody);
             setTimeout(() => {
                 window.location.href = "./login.html"
-            },1000)
+            },4000)
         }
     })
 }

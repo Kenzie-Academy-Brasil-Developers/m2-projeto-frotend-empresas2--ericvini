@@ -65,17 +65,19 @@ export function toggleModal() {
   const close = document.querySelectorAll("[data-modal=close]");
   const dialog = document.querySelector(".modal__wrapper");
   const modal = document.querySelector(".modal__container");
-  close.forEach(element => element.addEventListener('click', (e) => {
-    if (
-      modal.classList.contains("modal__container--view") ||
-      modal.classList.contains("modal__container--delete") ||
-      modal.classList.contains("modal__container--edit")
-    ) {
-      modal.classList.remove("modal__container--view");
-      modal.classList.remove("modal__container--delete");
-      modal.classList.remove("modal__container--edit");
-    }
-  }))
+  close.forEach((element) =>
+    element.addEventListener("click", (e) => {
+      if (
+        modal.classList.contains("modal__container--view") ||
+        modal.classList.contains("modal__container--delete") ||
+        modal.classList.contains("modal__container--edit")
+      ) {
+        modal.classList.remove("modal__container--view");
+        modal.classList.remove("modal__container--delete");
+        modal.classList.remove("modal__container--edit");
+      }
+    })
+  );
   buttons.forEach((element) =>
     element.addEventListener("click", (e) => {
       if (dialog.classList.contains("display__none")) {
@@ -96,6 +98,35 @@ export const createOption = (option, uuid) => {
   newOption.innerText = option;
   return newOption;
 };
+
+export function toastfy(message, color = false) {
+  const body = document.querySelector("body");
+  body.insertAdjacentHTML(
+    "afterbegin",
+    `
+  <div class="toast__container">
+    <p>
+    ${message}
+    </p>
+  </div>
+  `
+  );
+  const container = document.querySelector(".toast__container");
+  if (!color) {
+    container.classList.add("toast-error");
+  } else {
+    container.classList.add("toast-success");
+  }
+  setTimeout(() => {
+    container.classList.add("toast__remove");
+  }, 3000);
+  setTimeout(() => {
+    container.removeAttribute("class");
+    container.innerHTML = "";
+    container.classList.add("display__none");
+    container.classList.add("toast__container");
+  }, 3990);
+}
 // ADMIN REQUESTS
 const token = localStorage.getItem("@KenzieEmpresas:token");
 const authHeaders = {

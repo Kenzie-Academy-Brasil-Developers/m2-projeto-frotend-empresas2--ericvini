@@ -24,7 +24,7 @@ button:hover {
 .toast-error {
     background-color: var(--color-alert);
 }
-.toast-sucess {
+.toast-success {
     background-color: var(--color-sucess);
 }
 .brand-color {
