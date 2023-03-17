@@ -51,11 +51,12 @@ function registerUser () {
             }
             registerBody[name] = value;
         })
+        console.log(registerBody)
         if(count !== 0) {
             toastfy("Preencha os campos corretamente")
         }else {
-            toastfy("Usuário criado com sucesso", true)
             await register(registerBody);
+            toastfy("Usuário criado com sucesso", true)
             setTimeout(() => {
                 window.location.href = "./login.html"
             },4000)
