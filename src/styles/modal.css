@@ -261,7 +261,7 @@
     position: fixed;
     top: 30px;
     right: 40%;
-    z-index: 15;
+    z-index: 25;
     border-radius: 10px;
     display: flex;
     align-items: center;

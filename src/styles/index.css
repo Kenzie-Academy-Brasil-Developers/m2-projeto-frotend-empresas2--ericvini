@@ -257,6 +257,9 @@ main {
     .display__none {
         display: none;
     }
+    .display__flex {
+        display: flex;
+    }
 }
 
 @media (min-width:767px) {

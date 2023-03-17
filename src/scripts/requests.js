@@ -60,6 +60,20 @@ export async function getSectors() {
     .catch((err) => console.log(err));
   return sectors;
 }
+export function toggleBar() {
+  const bar = document.querySelector("#bars");
+  const header = document.querySelector(".header__container");
+  const buttons = document.querySelector(".header__container--buttons");
+  return bar.addEventListener("click", (e) => {
+    if(buttons.classList.contains('display__flex')) {
+      buttons.classList.remove('display__flex')
+    }else {
+      buttons.classList.add('display__flex')
+    }
+    header.classList.toggle("height-10rem");
+    buttons.classList.toggle("header__container--animation");
+  });
+}
 export function toggleModal() {
   const buttons = document.querySelectorAll("[data-modal]");
   const close = document.querySelectorAll("[data-modal=close]");

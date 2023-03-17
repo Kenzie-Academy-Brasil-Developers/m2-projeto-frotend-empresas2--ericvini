@@ -8,6 +8,7 @@ import {
   editProfile,
   getCompanyinfo,
   toastfy,
+  toggleBar
 } from "./requests.js";
 
 import {
@@ -18,17 +19,6 @@ import {
   createDepartmentEditModal,
   deleteDepartmentModal,
 } from "./modal.js";
-
-function toggleBar() {
-  const bar = document.querySelector("#bars");
-  const header = document.querySelector(".header__container");
-  const buttons = document.querySelector(".header__container--buttons");
-  return bar.addEventListener("click", (e) => {
-    header.classList.toggle("height-10rem");
-    buttons.classList.toggle("header__container--animation");
-    buttons.classList.toggle("display__none");
-  });
-}
 
 function logout() {
   const clear = () => localStorage.clear();
@@ -131,7 +121,7 @@ async function createUserCard({
     );
     return departamento.name;
   };
-  return lista.insertAdjacentHTML(
+  lista.insertAdjacentHTML(
     "beforeend",
     `
     <li class="section__list--item">
@@ -194,6 +184,7 @@ async function renderSelectEnterprises() {
     deleteDepartmentModal();
   });
 }
+
 export async function render() {
   const allUsers = document.querySelector(`.section__list--users`);
   const allDepartments = document.querySelector(`.section__list--department`);
@@ -201,9 +192,9 @@ export async function render() {
   const departments = await listDepartments();
   allDepartments.innerHTML = "";
   allUsers.innerHTML = "";
-  users.forEach((element) => createUserCard(element));
-  createUserEditModal();
+  users.forEach(async (element) => createUserCard(element));
   deleteUserModal();
+  createUserEditModal();
   departments.forEach((element) => createDepartmentCard(element, "department"));
   createViewModal();
   createDepartmentModal();
@@ -211,13 +202,14 @@ export async function render() {
   deleteDepartmentModal();
 }
 
-logout();
 toggleBar();
 
 if (window.location.pathname === "/src/pages/admin.html") {
   render();
   renderSelectEnterprises();
+  logout();
 } else {
   createProfile();
   createDepartmentProfile();
+  logout();
 }

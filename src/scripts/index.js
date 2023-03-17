@@ -1,4 +1,5 @@
-import {getToken, register, authenticateUser, toastfy} from './requests.js';
+import {getToken, register, authenticateUser, toastfy, toggleBar} from './requests.js';
+
 
 
 function loginUser() {
@@ -51,7 +52,6 @@ function registerUser () {
             }
             registerBody[name] = value;
         })
-        console.log(registerBody)
         if(count !== 0) {
             toastfy("Preencha os campos corretamente")
         }else {
@@ -63,7 +63,7 @@ function registerUser () {
         }
     })
 }
-
+toggleBar()
 if(window.location.pathname === "/src/pages/register.html") {
     registerUser()
 }else {

@@ -19,6 +19,7 @@ import { render } from "./dashboard.js";
 export function createUserEditModal() {
   const modal = document.querySelector(".modal__container");
   const buttons = document.querySelectorAll(".button__pencil--users");
+  console.log(buttons)
   buttons.forEach((element) =>
     element.addEventListener("click", (e) => {
       const id = e.target.dataset.id;
@@ -28,25 +29,25 @@ export function createUserEditModal() {
         `
           <h2>Editar Usuário</h2>
           <button class="modal__button--X" data-modal="close">
-                  <i class="fa-sharp fa-solid fa-x"></i>
-              </button>
+              <i class="fa-sharp fa-solid fa-x"></i>
+          </button>
           <form class="modal__form--edit">
-          <select class="modal__edit--select" name="kind_of_work" id="modality">
-          <option value="">Selecionar modalidade de trabalho</option>
-          <option value="home office">Home office</option>
-              <option value="presencial">Presencial</option>
-              <option value="híbrido">Híbrido</option>
-              </select>
-          <select class="modal__edit--select" name="professional_level" id="professional">
+            <select class="modal__edit--select" name="kind_of_work" id="modality">
+                <option value="">Selecionar modalidade de trabalho</option>
+                <option value="home office">Home office</option>
+                <option value="presencial">Presencial</option>
+                <option value="híbrido">Híbrido</option>
+            </select>
+            <select class="modal__edit--select" name="professional_level" id="professional">
               <option value="">Selecionar nível profissional</option>
               <option value="estágio">Estágio</option>
               <option value="júnior">Junior</option>
               <option value="pleno">Pleno</option>
               <option value="sênior">Sênior</option>
-              </select>
-              <button type="submit" class="modal__button--edit" data-id="${id}">Editar Perfil</button>
-              </form>
-              `
+            </select>
+            <button type="submit" class="modal__button--edit" data-id="${id}">Editar Perfil</button>
+          </form>
+        `
       );
       editUserInfo();
       toggleModal();
@@ -66,6 +67,8 @@ function editUserInfo() {
       }
     });
     const newUser = await updateUser(id, changedUser);
+    toastfy("Usuário editado com sucesso", true);
+    await render()
     return newUser;
   });
 }
@@ -102,7 +105,8 @@ function deleteSelectedUser() {
   const button = document.querySelector(".modal__delete");
   button.addEventListener("click", async (e) => {
     const deleted = await deleteUser(e.target.dataset.id);
-    render();
+    toastfy("Usuário deletado com sucesso", true);
+    await render();
     return deleted;
   });
 }
@@ -119,12 +123,12 @@ export function createDepartmentModal() {
       <button class="modal__button--X" data-modal="close">
           <i class="fa-sharp fa-solid fa-x"></i></button>
       <form class="form__container--create">
-          <input type="text" name="name" class="form__create--input" placeholder="Digite o nome da Empresas" >
+          <input type="text" autocomplete="off" name="name" class="form__create--input" placeholder="Digite o nome da Empresas" >
           <input type="text" name="description" class="form__create--input" placeholder="Descrição" >
           <select name="company_uuid" id="create--select" class="form__create--input">
               <option value="">Selecionar empresas</option>
           </select>
-          <button class="form__department--button">
+          <button class="form__department--button" data-modal="close">
               Criar departamento
           </button>
       </form>
@@ -145,6 +149,7 @@ function createNewDepartment() {
   const button = document.querySelector(".form__department--button");
   const inputs = document.querySelectorAll(".form__create--input");
   button.addEventListener("click", async (e) => {
+    e.preventDefault()
     const body = {};
     inputs.forEach(({ name, value }) => {
       if (value !== "") {
@@ -152,7 +157,12 @@ function createNewDepartment() {
       }
     });
     const newDepartment = await createDepartment(body);
-    toastfy();
+    if (newDepartment.error) {
+      toastfy("Erro ao criar departamento");
+    } else {
+      toastfy("Departamento criado com sucesso", true);
+    }
+    await render()
     return newDepartment;
   });
 }
@@ -203,6 +213,7 @@ function hireWorkerButton() {
       department_uuid: e.target.dataset.id,
     };
     const newWorker = await hireWorker(ids);
+    toastfy("Funcionário contratado com sucesso", true);
     createSelectOutWork();
     createDepartmentWorkers();
     return newWorker;
@@ -214,6 +225,7 @@ function dismissWorkerButton() {
   buttons.forEach((element) =>
     element.addEventListener("click", async (e) => {
       const dismissed = await dismissWorker(e.target.dataset.id);
+      toastfy("Funcionário demitido com sucesso");
       createDepartmentWorkers();
       return dismissed;
     })
@@ -297,11 +309,19 @@ function editDepartmentInfo() {
   const button = document.querySelector(".form__department--button");
   const textarea = document.querySelector("#edit--description");
   return button.addEventListener("click", async (e) => {
+    e.preventDefault();
     const id = e.target.dataset.id;
     const newInfo = {
       description: textarea.value,
     };
+
     const newDepartment = await editDepartment(id, newInfo);
+    if (newDepartment.error) {
+      toastfy("Erro ao editar informações do departamento");
+    } else {
+      toastfy("Informações atualizadas", true);
+    }
+    await render();
     return newDepartment;
   });
 }
@@ -311,8 +331,8 @@ export function deleteDepartmentModal() {
   const buttons = document.querySelectorAll(".button__trash--department");
   buttons.forEach((element) =>
     element.addEventListener("click", async (e) => {
-      const id = e.target.dataset.id;
       const allDepartments = await listDepartments();
+      const id = e.target.dataset.id;
       const departmentName = allDepartments.find(
         (element) => element.uuid === id
       ).name;
@@ -321,13 +341,15 @@ export function deleteDepartmentModal() {
       modal.insertAdjacentHTML(
         "afterbegin",
         `
-        <h2>Realmente deseja remover o departamento ${departmentName}?</h2>
-        <button class="modal__button--X" data-modal="close">
-            <i class="fa-sharp fa-solid fa-x"></i>
-        </button>
-        <button data-modal="close" data-id="${id}" class="modal__delete">
-            Deletar
-        </button>
+        <form class="form__delete">
+          <h2>Realmente deseja remover o departamento ${departmentName}?</h2>
+          <button class="modal__button--X" data-modal="close">
+              <i class="fa-sharp fa-solid fa-x"></i>
+          </button>
+          <button data-id="${id}" class="modal__delete" data-modal="close" >
+          Deletar
+          </button>
+        </form>
         `
       );
       deleteSelectedDepartment();
@@ -338,9 +360,11 @@ export function deleteDepartmentModal() {
 
 function deleteSelectedDepartment() {
   const button = document.querySelector(".modal__delete");
-  button.addEventListener("click", async (e) => {
-    const deleted = await deleteDepartment(e.target.dataset.id);
-    render();
-    return deleted;
+  return button.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const deletedDepartment = await deleteDepartment(e.target.dataset.id);
+    toastfy("Departamento Excluido", true);
+    await render();
+    return deletedDepartment;
   });
 }

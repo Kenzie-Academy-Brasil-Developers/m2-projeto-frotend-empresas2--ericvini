@@ -181,6 +181,13 @@
         height: 100%;
         font-size: 2rem;
     }
+    .form__delete {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 95%;
+        height: 98%;
+    }
 }
 @media (min-width: 768px) {
     #pencil {

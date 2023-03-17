@@ -3,6 +3,7 @@ import {
   getSectors,
   toggleModal,
   createOption,
+  toggleBar
 } from "./requests.js";
 
 function createEnterprise({
@@ -30,7 +31,6 @@ async function renderEnterprises() {
   lista.innerHTML = "";
   const enterprises = await getEnterprises();
   await renderSelect();
-  await renderSelectedEnterprises();
   return enterprises.forEach((element) => createEnterprise(element));
 }
 
@@ -38,26 +38,28 @@ async function renderSelect() {
   const select = document.querySelector("select");
   select.innerHTML = "";
   const options = await getSectors();
-  select.append(createOption("Selecione uma empresa", ""));
-  return options.forEach(({ description }) =>
-    select.appendChild(createOption(description))
+  select.appendChild(createOption("Selecione uma empresa", " "));
+  options.forEach(({ description }) =>
+  select.appendChild(createOption(description))
   );
+  await renderSelectedEnterprises();
 }
 
 function renderSelectedEnterprises() {
   const select = document.querySelector("select");
-  select.addEventListener("click", async (e) => {
+  select.addEventListener("change", async (e) => {
     const value = select.value;
     const enterprises = await getEnterprises(value);
-    if (value !== "Selecione uma empresa") {
-      const lista = document.querySelector(".sectors__container--list");
-      lista.innerHTML = "";
+    const lista = document.querySelector(".sectors__container--list");
+    lista.innerHTML = "";
+    if (value !== " ") {
       return enterprises.forEach((element) => createEnterprise(element));
     } else {
-      return renderEnterprises();
+      return enterprises.forEach((element) => createEnterprise(element));
     }
   });
 }
 
 renderEnterprises();
+toggleBar()
 toggleModal();
